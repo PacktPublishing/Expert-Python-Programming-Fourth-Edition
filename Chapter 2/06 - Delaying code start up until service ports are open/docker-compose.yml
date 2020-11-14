@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  echo-server:
+    build: .
+    ports:
+    - "5000:5000"
+    tty: true
+    depends_on:
+      - database
+    command:
+      wait-for-it --service database:5432 --
+      python echo.py
+
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
