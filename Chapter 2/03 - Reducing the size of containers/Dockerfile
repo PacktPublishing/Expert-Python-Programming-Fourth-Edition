@@ -9,4 +9,4 @@ RUN apk add py3-pip && \
     apk del py3-pip
 
 COPY echo.py .
-ENTRYPOINT ["python", "echo.py"]
+CMD ["python", "echo.py"]

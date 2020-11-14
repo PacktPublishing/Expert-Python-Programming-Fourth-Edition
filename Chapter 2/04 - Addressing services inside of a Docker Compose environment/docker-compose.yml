@@ -9,8 +9,9 @@ services:
     environment:
       - DATABASE_HOSTNAME=database
       - DATABASE_PORT=5432
+      - DATABASE_PASSWORD=password
+
   database:
     image: postgres
-
-  cache:
-    image: redis
+    environment:
+      POSTGRES_PASSWORD: password

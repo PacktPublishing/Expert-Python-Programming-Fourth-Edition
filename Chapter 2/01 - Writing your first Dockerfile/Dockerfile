@@ -7,4 +7,4 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY echo.py .
-ENTRYPOINT ["python", "echo.py"]
+CMD ["python", "echo.py"]
