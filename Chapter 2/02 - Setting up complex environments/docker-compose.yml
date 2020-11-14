@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  echo-server:
+    # this tell Docker Compose to build image from
+    # local (.) directory
+    build: .
+
+    # this is equivalent to "-p" option of
+    # the "docker build" command
+    ports:
+    - "5000:5000"
+
+    # this is equivalent to "-t" option of
+    # the "docker build" command
+    tty: true
+
+  database:
+    image: postgres
+
+  cache:
+    image: redis
