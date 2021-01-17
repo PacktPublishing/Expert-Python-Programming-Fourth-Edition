@@ -1,0 +1,5 @@
+Matrix operator+(const Matrix& lhs, const Matrix& rhs)
+Matrix operator+(const Matrix& lhs, const int& rhs)
+Matrix operator+(const Matrix& lhs, const float& rhs)
+Matrix operator+(const int& lhs, const Matrix& rhs)
+Matrix operator+(const float& lhs, const Matrix& rhs)
