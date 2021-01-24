@@ -10,9 +10,9 @@ def fetch_rates(base):
     response = requests.get(
         f"https://api.exchangeratesapi.io/latest?base={base}"
     )
-
     response.raise_for_status()
     rates = response.json()["rates"]
+
     # note: same currency exchanges to itself 1:1
     rates[base] = 1.
 
