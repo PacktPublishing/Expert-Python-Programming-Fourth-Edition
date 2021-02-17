@@ -1,0 +1,68 @@
+L[MyClass]
+  = [MyClass] + merge(L[Base1], L[Base2], [Base1, Base2])]
+  = [MyClass] + merge(
+      [Base1 + merge(L[CommonBase], [CommonBase])],
+      [Base2 + merge(L[CommonBase], [CommonBase])],
+      [Base1, Base2]
+    )
+  = [MyClass] + merge(
+      [Base1] + merge(L[CommonBase], [CommonBase]),
+      [Base2] + merge(L[CommonBase], [CommonBase]),
+      [Base1, Base2]
+    )
+  = [MyClass] + merge(
+      [Base1] + merge([CommonBase] + merge(L[object]), [CommonBase]),
+      [Base2] + merge([CommonBase] + merge(L[object]), [CommonBase]),
+      [Base1, Base2]
+    )
+  = [MyClass] + merge(
+    [Base1] + merge([CommonBase] + merge([object]), [CommonBase]),
+    [Base2] + merge([CommonBase] + merge([object]), [CommonBase]),
+    [Base1, Base2]
+  )
+  = [MyClass] + merge(
+    [Base1] + merge([CommonBase] + merge([object]), [CommonBase]),
+    [Base2] + merge([CommonBase] + merge([object]), [CommonBase]),
+    [Base1, Base2]
+  )
+  = [MyClass] + merge(
+    [Base1] + merge([CommonBase, object] + merge([]), [CommonBase]),
+    [Base2] + merge([CommonBase, object] + merge([]), [CommonBase]),
+    [Base1, Base2]
+  )
+  = [MyClass] + merge(
+    [Base1] + merge([CommonBase, object], [CommonBase]),
+    [Base2] + merge([CommonBase, object], [CommonBase]),
+    [Base1, Base2]
+  )
+  = [MyClass] + merge(
+    [Base1, CommonBase] + merge([object], []),
+    [Base2, CommonBase] + merge([object], []),
+    [Base1, Base2]
+  )
+  = [MyClass] + merge(
+    [Base1, CommonBase, object] + merge([], [])
+    [Base2, CommonBase, object] + merge([], [])
+    [Base1, Base2]
+  )
+  = [MyClass] + merge(
+    [Base1, CommonBase, object],
+    [Base2, CommonBase, object],
+    [Base1, Base2]
+  )
+  = [MyClass, Base1] + merge(
+    [CommonBase, object],
+    [Base2, CommonBase, object],
+    [Base2]
+  )
+  = [MyClass, Base1, Base2] + merge(
+    [CommonBase, object],
+    [CommonBase, object],
+    []
+  )
+  = [MyClass, Base1, Base2, CommonBase] + merge(
+    [object],
+    [object],
+    []
+  )
+  = [MyClass, Base1, Base2, CommonBase, object] + merge([], [], [])
