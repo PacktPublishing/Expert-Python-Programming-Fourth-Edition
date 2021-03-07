@@ -3,3 +3,7 @@ __pycache__
 *.egg-info
 *.so
 build/
+.mutmut-cache
+.pytest_cache
+.coverage
+htmlcov

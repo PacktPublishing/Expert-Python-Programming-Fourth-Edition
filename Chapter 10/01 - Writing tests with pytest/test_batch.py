@@ -5,17 +5,12 @@ from batch import batches
 
 
 def test_batch_on_lists():
-    assert list(batches([1, 2, 3, 4, 5, 6], 1)) == [
-        [1], [2], [3], [4], [5], [6]
-    ]
-    assert list(batches([1, 2, 3, 4, 5, 6], 2)) == [
-        [1, 2], [3, 4], [5, 6]
-    ]
-    assert list(batches([1, 2, 3, 4, 5, 6], 3)) == [
-        [1, 2, 3], [4, 5, 6]
-    ]
+    assert list(batches([1, 2, 3, 4, 5, 6], 1)) == [[1], [2], [3], [4], [5], [6]]
+    assert list(batches([1, 2, 3, 4, 5, 6], 2)) == [[1, 2], [3, 4], [5, 6]]
+    assert list(batches([1, 2, 3, 4, 5, 6], 3)) == [[1, 2, 3], [4, 5, 6]]
     assert list(batches([1, 2, 3, 4, 5, 6], 4)) == [
-        [1, 2, 3, 4], [5, 6],
+        [1, 2, 3, 4],
+        [5, 6],
     ]
 
 

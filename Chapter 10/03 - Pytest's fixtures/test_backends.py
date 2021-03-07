@@ -14,7 +14,7 @@ def counter_backend():
 
 @pytest.fixture(scope="session")
 def redis_client():
-    return Redis(host='localhost', port=6379)
+    return Redis(host="localhost", port=6379)
 
 
 @pytest.fixture
@@ -22,10 +22,7 @@ def redis_backend(redis_client: Redis):
     set_name = "test-page-counts"
     redis_client.delete(set_name)
 
-    return RedisBackend(
-        redis_client=redis_client,
-        set_name=set_name
-    )
+    return RedisBackend(redis_client=redis_client, set_name=set_name)
 
 
 @pytest.fixture(params=["redis_backend", "counter_backend"])
@@ -33,9 +30,7 @@ def backend(request):
     return request.getfixturevalue(request.param)
 
 
-@pytest.mark.parametrize(
-    "n", [0] + [random.randint(0, 100) for _ in range(5)]
-)
+@pytest.mark.parametrize("n", [0] + [random.randint(0, 100) for _ in range(5)])
 def test_empty_backend(backend: ViewsStorageBackend, n: int):
     assert backend.most_common(n) == {}
 
@@ -72,6 +67,4 @@ def test_increments_top(backend: ViewsStorageBackend):
     assert len(backend.most_common(3)) == 3
 
     top2_values = backend.most_common(2).values()
-    assert list(top2_values) == (
-        sorted(increments.values(), reverse=True)[:2]
-    )
+    assert list(top2_values) == (sorted(increments.values(), reverse=True)[:2])

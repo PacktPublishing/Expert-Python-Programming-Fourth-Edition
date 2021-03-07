@@ -2,9 +2,7 @@ from typing import Any, Iterable, List
 from itertools import islice
 
 
-def batches(
-    iterable: Iterable[Any], batch_size: int
-) -> Iterable[List[Any]]:
+def batches(iterable: Iterable[Any], batch_size: int) -> Iterable[List[Any]]:
     iterator = iter(iterable)
 
     while True:
