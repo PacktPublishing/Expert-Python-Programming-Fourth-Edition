@@ -8,17 +8,11 @@ import os
 
 
 def work(identifier):
-    print(
-        f'Hey, I am the process '
-        f'{identifier}, pid: {os.getpid()}'
-    )
+    print(f"Hey, I am the process " f"{identifier}, pid: {os.getpid()}")
 
 
 def main():
-    processes = [
-        Process(target=work, args=(number,))
-        for number in range(5)
-    ]
+    processes = [Process(target=work, args=(number,)) for number in range(5)]
     for process in processes:
         process.start()
 

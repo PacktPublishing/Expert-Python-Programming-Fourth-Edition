@@ -10,10 +10,7 @@ class InstanceCountingClass:
         return instance
 
     def __repr__(self):
-        return (
-            f"<{self.__class__.__name__}: "
-            f"{self.number} of {self.created}>"
-        )
+        return f"<{self.__class__.__name__}: " f"{self.number} of {self.created}>"
 
 
 if __name__ == "__main__":

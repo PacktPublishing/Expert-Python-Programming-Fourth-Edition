@@ -10,23 +10,20 @@ import aiohttp
 
 from asyncrates import get_rates
 
-SYMBOLS = ('USD', 'EUR', 'PLN', 'NOK', 'CZK')
-BASES = ('USD', 'EUR', 'PLN', 'NOK', 'CZK')
+SYMBOLS = ("USD", "EUR", "PLN", "NOK", "CZK")
+BASES = ("USD", "EUR", "PLN", "NOK", "CZK")
 
 
 def present_result(base, rates):
-    rates_line = ", ".join(
-        [f"{rates[symbol]:7.03} {symbol}" for symbol in SYMBOLS]
-    )
+    rates_line = ", ".join([f"{rates[symbol]:7.03} {symbol}" for symbol in SYMBOLS])
     print(f"1 {base} = {rates_line}")
 
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        for result in await asyncio.gather(*[
-            get_rates(session, base)
-            for base in BASES
-        ]):
+        for result in await asyncio.gather(
+            *[get_rates(session, base) for base in BASES]
+        ):
             present_result(*result)
 
 

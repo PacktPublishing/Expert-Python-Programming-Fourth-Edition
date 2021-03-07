@@ -11,11 +11,11 @@ else:
     import rlcompleter
 
     # tab completion
-    readline.parse_and_bind('tab: complete')
+    readline.parse_and_bind("tab: complete")
 
     # Path to history file in user's home directory.
     # Can use your own path.
-    history_file = os.path.join(os.environ['HOME'], '.python_shell_history')
+    history_file = os.path.join(os.environ["HOME"], ".python_shell_history")
     try:
         readline.read_history_file(history_file)
     except IOError:

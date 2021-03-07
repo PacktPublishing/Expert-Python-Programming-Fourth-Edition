@@ -17,11 +17,7 @@ class CounterBackend(ViewsStorageBackend):
 
 
 class RedisBackend(ViewsStorageBackend):
-    def __init__(
-        self,
-        redis_client: Redis,
-        set_name: str
-    ):
+    def __init__(self, redis_client: Redis, set_name: str):
         self._client = redis_client
         self._set_name = set_name
 
@@ -31,9 +27,10 @@ class RedisBackend(ViewsStorageBackend):
     def most_common(self, n: int) -> Dict[str, int]:
         return {
             key.decode(): int(value)
-            for key, value in
-            self._client.zrange(
-                self._set_name, 0, n-1,
+            for key, value in self._client.zrange(
+                self._set_name,
+                0,
+                n - 1,
                 desc=True,
                 withscores=True,
             )

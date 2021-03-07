@@ -27,14 +27,12 @@ def main():
 
     for item in (
         42,
-        'some string',
-        {'one': 1},
+        "some string",
+        {"one": 1},
         CustomClass(),
         None,
     ):
-        print(
-            "PRNT: send: {}".format(item)
-        )
+        print("PRNT: send: {}".format(item))
         parent_conn.send(item)
 
     child.start()

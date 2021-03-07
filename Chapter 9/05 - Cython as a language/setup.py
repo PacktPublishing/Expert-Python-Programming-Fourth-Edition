@@ -16,7 +16,7 @@ try:
 except ImportError:
     USE_CYTHON = False
 
-ext = '.pyx' if USE_CYTHON else '.c'
+ext = ".pyx" if USE_CYTHON else ".c"
 
 extensions = [Extension("fibonacci", ["fibonacci" + ext])]
 
@@ -26,12 +26,12 @@ if USE_CYTHON:
     extensions = cythonize(extensions)
 
 setup(
-    name='fibonacci',
+    name="fibonacci",
     ext_modules=extensions,
     extras_require={
         # Cython will be set in that specific version
         # as a requirement if package will be intalled
         # with '[with-cython]' extra feature
-        'with-cython': ['cython==0.29.22']
-    }
+        "with-cython": ["cython==0.29.22"]
+    },
 )

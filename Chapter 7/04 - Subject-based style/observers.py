@@ -7,12 +7,14 @@ from glob import glob
 
 class ObserverABC(ABC):
     @abstractmethod
-    def notify(self, event): ...
+    def notify(self, event):
+        ...
 
 
 class SubjectABC(ABC):
     @abstractmethod
-    def register(self, observer: ObserverABC): ...
+    def register(self, observer: ObserverABC):
+        ...
 
 
 class Grepper(SubjectABC):

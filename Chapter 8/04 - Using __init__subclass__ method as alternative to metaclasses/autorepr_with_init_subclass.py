@@ -5,8 +5,7 @@ UNSET = object()
 
 def repr_instance(instance: object, attrs: Iterable[str]):
     attr_values: dict[str, Any] = {
-        attr: getattr(instance, attr, UNSET)
-        for attr in attrs
+        attr: getattr(instance, attr, UNSET) for attr in attrs
     }
     sub_repr = ", ".join(
         f"{attr}={repr(val) if val is not UNSET else 'UNSET'}"
@@ -16,18 +15,22 @@ def repr_instance(instance: object, attrs: Iterable[str]):
 
 
 def autorepr(cls):
-    attrs = set.union(*(
-        set(c.__annotations__.keys())
-        for c in cls.mro()
-        if hasattr(c, "__annotations__")
-    ))
+    attrs = set.union(
+        *(
+            set(c.__annotations__.keys())
+            for c in cls.mro()
+            if hasattr(c, "__annotations__")
+        )
+    )
 
     def __repr__(self):
         return repr_instance(self, attrs)
+
     cls.__repr__ = __repr__
 
     def __init_subclass__(cls):
         autorepr(cls)
+
     cls.__init_subclass__ = classmethod(__init_subclass__)
 
     return cls

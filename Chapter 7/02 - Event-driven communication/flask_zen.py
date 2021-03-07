@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 rot13 = str.maketrans(
     "ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz",
-    "NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm"
+    "NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm",
 )
 
 
@@ -25,17 +25,15 @@ def simple_html(body):
     """
 
 
-@app.route('/')
+@app.route("/")
 def hello():
     return simple_html("<a href=/zen>Python Zen</a>")
 
 
-@app.route('/zen')
+@app.route("/zen")
 def zen():
-    return simple_html(
-        "<br>".join(this.s.translate(rot13).split("\n"))
-    )
+    return simple_html("<br>".join(this.s.translate(rot13).split("\n")))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

@@ -2,9 +2,7 @@ import os
 import re
 import sys
 
-import_re = re.compile(
-    r"^\s*import\s+\.{0,2}((\w+\.)*(\w+))\s*$"
-)
+import_re = re.compile(r"^\s*import\s+\.{0,2}((\w+\.)*(\w+))\s*$")
 import_from_re = re.compile(
     r"^\s*from\s+\.{0,2}((\w+\.)*(\w+))\s+import\s+(\w+|\*)+\s*$"
 )

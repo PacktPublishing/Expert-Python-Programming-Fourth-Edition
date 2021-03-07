@@ -5,8 +5,7 @@ UNSET = object()
 
 def repr_instance(instance: object, attrs: Iterable[str]):
     attr_values: dict[str, Any] = {
-        attr: getattr(instance, attr, UNSET)
-        for attr in attrs
+        attr: getattr(instance, attr, UNSET) for attr in attrs
     }
     sub_repr = ", ".join(
         f"{attr}={repr(val) if val is not UNSET else 'UNSET'}"

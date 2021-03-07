@@ -9,51 +9,41 @@ class Matrix:
         self.rows = rows
 
     def __add__(self, other):
-        if (
-            len(self.rows) != len(other.rows) or
-            len(self.rows[0]) != len(other.rows[0])
-        ):
+        if len(self.rows) != len(other.rows) or len(self.rows[0]) != len(other.rows[0]):
             raise ValueError("Matrix dimensions don't match")
 
         if isinstance(other, Matrix):
-            return Matrix([
-                [a + b for a, b in zip(a_row, b_row)]
-                for a_row, b_row in zip(self.rows, other.rows)
-            ])
+            return Matrix(
+                [
+                    [a + b for a, b in zip(a_row, b_row)]
+                    for a_row, b_row in zip(self.rows, other.rows)
+                ]
+            )
         elif isinstance(other, Number):
-            return Matrix([
-                [item + other for item in row]
-                for row in self.rows
-            ])
+            return Matrix([[item + other for item in row] for row in self.rows])
         else:
             raise TypeError(f"Can't add {type(other)} to Matrix")
 
     def __sub__(self, other):
-        if (
-            len(self.rows) != len(other.rows) or
-            len(self.rows[0]) != len(other.rows[0])
-        ):
+        if len(self.rows) != len(other.rows) or len(self.rows[0]) != len(other.rows[0]):
             raise ValueError("Matrix dimensions don't match")
 
         if isinstance(other, Matrix):
-            return Matrix([
-                [a - b for a, b in zip(a_row, b_row)]
-                for a_row, b_row in zip(self.rows, other.rows)
-            ])
+            return Matrix(
+                [
+                    [a - b for a, b in zip(a_row, b_row)]
+                    for a_row, b_row in zip(self.rows, other.rows)
+                ]
+            )
         elif isinstance(other, Number):
-            return Matrix([
-                [item - other for item in row]
-                for row in self.rows
-            ])
+            return Matrix([[item - other for item in row] for row in self.rows])
         else:
             raise TypeError(f"Can't subtract {type(other)} from Matrix")
 
     def __mul__(self, other):
         if isinstance(other, Matrix):
             if len(self.rows[0]) != len(other.rows):
-                raise ValueError(
-                    "Matrix dimensions don't match"
-                )
+                raise ValueError("Matrix dimensions don't match")
 
             rows = [[0 for _ in other.rows[0]] for _ in self.rows]
 
@@ -65,10 +55,7 @@ class Matrix:
             return Matrix(rows)
 
         elif isinstance(other, Number):
-            return Matrix([
-                [item * other for item in row]
-                for row in self.rows
-            ])
+            return Matrix([[item * other for item in row] for row in self.rows])
 
         else:
             raise TypeError(f"Can't multiply {type(other)} with Matrix")
@@ -87,22 +74,28 @@ class Matrix:
 
 
 if __name__ == "__main__":
-    m0 = Matrix([
-        [1, 0, 0],
-        [0, 1, 0],
-        [0, 0, 1],
-    ])
-    m1 = Matrix([
-        [1, 2, 3],
-        [4, 1, 4],
-        [5, 7, 9],
-    ])
+    m0 = Matrix(
+        [
+            [1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1],
+        ]
+    )
+    m1 = Matrix(
+        [
+            [1, 2, 3],
+            [4, 1, 4],
+            [5, 7, 9],
+        ]
+    )
     assert (m1 * m0).rows == m1.rows
-    m2 = Matrix([
-        [1, 2, 3],
-        [1, 4, 3],
-        [1, 0, 5],
-    ])
+    m2 = Matrix(
+        [
+            [1, 2, 3],
+            [1, 4, 3],
+            [1, 0, 5],
+        ]
+    )
     assert (m2 * m0).rows == m2.rows
 
     assert m1 * 2 == m1 + m1

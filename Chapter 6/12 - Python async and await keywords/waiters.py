@@ -12,7 +12,5 @@ async def waiter(name):
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(
-        asyncio.gather(waiter("first"), waiter("second"))
-    )
+    loop.run_until_complete(asyncio.gather(waiter("first"), waiter("second")))
     loop.close()

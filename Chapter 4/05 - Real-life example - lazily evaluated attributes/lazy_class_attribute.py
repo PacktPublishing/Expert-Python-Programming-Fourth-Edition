@@ -38,10 +38,6 @@ class ObjectUsingShaderProgram(object):
     def shader_program(self):
         print("compiling!")
         return shaders.compileProgram(
-            shaders.compileShader(
-                self.VERTEX_CODE, gl.GL_VERTEX_SHADER
-            ),
-            shaders.compileShader(
-                self.FRAGMENT_CODE, gl.GL_FRAGMENT_SHADER
-            )
+            shaders.compileShader(self.VERTEX_CODE, gl.GL_VERTEX_SHADER),
+            shaders.compileShader(self.FRAGMENT_CODE, gl.GL_FRAGMENT_SHADER),
         )

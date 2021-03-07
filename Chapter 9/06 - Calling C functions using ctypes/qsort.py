@@ -3,7 +3,7 @@ from random import shuffle
 import ctypes
 from ctypes.util import find_library
 
-libc = ctypes.cdll.LoadLibrary(find_library('c'))
+libc = ctypes.cdll.LoadLibrary(find_library("c"))
 
 CMPFUNC = ctypes.CFUNCTYPE(
     # return type
@@ -45,7 +45,7 @@ def main():
         # size of single array element
         ctypes.sizeof(ctypes.c_int),
         # callback (pointer to the C comparison function)
-        CMPFUNC(ctypes_int_compare)
+        CMPFUNC(ctypes_int_compare),
     )
     print("sorted:   ", list(c_array))
 

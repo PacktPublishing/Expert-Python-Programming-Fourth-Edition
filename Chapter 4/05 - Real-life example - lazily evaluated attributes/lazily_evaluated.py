@@ -10,19 +10,15 @@ class InitOnAccess:
 
     def __get__(self, instance, owner):
         if self._initialized is None:
-            print('initialized!')
-            self._initialized = self.klass(*self.args,
-                                           **self.kwargs)
+            print("initialized!")
+            self._initialized = self.klass(*self.args, **self.kwargs)
         else:
-            print('cached!')
+            print("cached!")
         return self._initialized
 
 
 class WithSortedRandoms:
-    lazily_initialized = InitOnAccess(
-        sorted,
-        [random.random() for _ in range(5)]
-    )
+    lazily_initialized = InitOnAccess(sorted, [random.random() for _ in range(5)])
 
 
 if __name__ == "__main__":

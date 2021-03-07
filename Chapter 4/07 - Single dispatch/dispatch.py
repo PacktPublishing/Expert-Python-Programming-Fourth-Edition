@@ -25,7 +25,7 @@ def _(value: Real):
 
 if __name__ == "__main__":
     print(report(datetime.now()))
-    print(report(100-30j))
+    print(report(100 - 30j))
     print(report("January"))
     for key, value in report.registry.items():
         print(f"{key} -> {value}")

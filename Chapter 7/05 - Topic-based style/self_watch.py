@@ -18,6 +18,7 @@ class SelfWatch:
     def __str__(self):
         return f"<{self.__class__.__name__}: {self._id}>"
 
+
 # >>> from topic_based_events import SelfWatch
 # >>> selfwatch1 = SelfWatch()
 # >>> selfwatch2 = SelfWatch()

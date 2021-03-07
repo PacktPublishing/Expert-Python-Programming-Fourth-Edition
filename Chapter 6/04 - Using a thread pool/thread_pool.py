@@ -12,23 +12,19 @@ import requests
 THREAD_POOL_SIZE = 4
 
 
-SYMBOLS = ('USD', 'EUR', 'PLN', 'NOK', 'CZK')
-BASES = ('USD', 'EUR', 'PLN', 'NOK', 'CZK')
+SYMBOLS = ("USD", "EUR", "PLN", "NOK", "CZK")
+BASES = ("USD", "EUR", "PLN", "NOK", "CZK")
 
 
 def fetch_rates(base):
-    response = requests.get(
-        f"https://api.exchangeratesapi.io/latest?base={base}"
-    )
+    response = requests.get(f"https://api.exchangeratesapi.io/latest?base={base}")
 
     response.raise_for_status()
     rates = response.json()["rates"]
     # note: same currency exchanges to itself 1:1
-    rates[base] = 1.
+    rates[base] = 1.0
 
-    rates_line = ", ".join(
-        [f"{rates[symbol]:7.03} {symbol}" for symbol in SYMBOLS]
-    )
+    rates_line = ", ".join([f"{rates[symbol]:7.03} {symbol}" for symbol in SYMBOLS])
     print(f"1 {base} = {rates_line}")
 
 
@@ -50,8 +46,7 @@ def main():
         work_queue.put(base)
 
     threads = [
-        Thread(target=worker, args=(work_queue,))
-        for _ in range(THREAD_POOL_SIZE)
+        Thread(target=worker, args=(work_queue,)) for _ in range(THREAD_POOL_SIZE)
     ]
 
     for thread in threads:
@@ -70,4 +65,3 @@ if __name__ == "__main__":
 
     print()
     print("time elapsed: {:.2f}s".format(elapsed))
-

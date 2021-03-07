@@ -14,8 +14,5 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
 
     loop.run_until_complete(
-        asyncio.gather([
-            print_number(number)
-            for number in range(10)
-        ])
+        asyncio.gather([print_number(number) for number in range(10)])
     )

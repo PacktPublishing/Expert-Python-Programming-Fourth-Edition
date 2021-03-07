@@ -11,28 +11,24 @@ from threading import Thread
 import requests
 
 
-SYMBOLS = ('USD', 'EUR', 'PLN', 'NOK', 'CZK')
-BASES = ('USD', 'EUR', 'PLN', 'NOK', 'CZK')
+SYMBOLS = ("USD", "EUR", "PLN", "NOK", "CZK")
+BASES = ("USD", "EUR", "PLN", "NOK", "CZK")
 
 THREAD_POOL_SIZE = 4
 
 
 def fetch_rates(base):
-    response = requests.get(
-        f"https://api.exchangeratesapi.io/latest?base={base}"
-    )
+    response = requests.get(f"https://api.exchangeratesapi.io/latest?base={base}")
 
     response.raise_for_status()
     rates = response.json()["rates"]
     # note: same currency exchanges to itself 1:1
-    rates[base] = 1.
+    rates[base] = 1.0
     return base, rates
 
 
 def present_result(base, rates):
-    rates_line = ", ".join(
-        [f"{rates[symbol]:7.03} {symbol}" for symbol in SYMBOLS]
-    )
+    rates_line = ", ".join([f"{rates[symbol]:7.03} {symbol}" for symbol in SYMBOLS])
     print(f"1 {base} = {rates_line}")
 
 
@@ -43,9 +39,7 @@ def worker(work_queue, results_queue):
         except Empty:
             break
         else:
-            results_queue.put(
-                fetch_rates(item)
-            )
+            results_queue.put(fetch_rates(item))
             work_queue.task_done()
 
 

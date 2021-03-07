@@ -14,46 +14,38 @@ class Matrix:
         if not isinstance(other, Matrix):
             raise TypeError(f"Can't add {type(other)} to Matrix")
 
-        if (
-            len(self.rows) != len(other.rows) or
-            len(self.rows[0]) != len(other.rows[0])
-        ):
+        if len(self.rows) != len(other.rows) or len(self.rows[0]) != len(other.rows[0]):
             raise ValueError("Matrix dimensions don't match")
 
-        return Matrix([
-            [a + b for a, b in zip(a_row, b_row)]
-            for a_row, b_row in zip(self.rows, other.rows)
-        ])
+        return Matrix(
+            [
+                [a + b for a, b in zip(a_row, b_row)]
+                for a_row, b_row in zip(self.rows, other.rows)
+            ]
+        )
 
     @__add__.register(Number)
     def _(self, other):
-        return Matrix([
-            [item + other for item in row]
-            for row in self.rows
-        ])
+        return Matrix([[item + other for item in row] for row in self.rows])
 
     @singledispatchmethod
     def __sub__(self, other):
         if not isinstance(other, Matrix):
             raise TypeError(f"Can't subtract {type(other)} from Matrix")
 
-        if (
-            len(self.rows) != len(other.rows) or
-            len(self.rows[0]) != len(other.rows[0])
-        ):
+        if len(self.rows) != len(other.rows) or len(self.rows[0]) != len(other.rows[0]):
             raise ValueError("Matrix dimensions don't match")
 
-        return Matrix([
-            [a - b for a, b in zip(a_row, b_row)]
-            for a_row, b_row in zip(self.rows, other.rows)
-        ])
+        return Matrix(
+            [
+                [a - b for a, b in zip(a_row, b_row)]
+                for a_row, b_row in zip(self.rows, other.rows)
+            ]
+        )
 
     @__sub__.register(Number)
     def _(self, other):
-        return Matrix([
-            [item - other for item in row]
-            for row in self.rows
-        ])
+        return Matrix([[item - other for item in row] for row in self.rows])
 
     @singledispatchmethod
     def __mul__(self, other):
@@ -61,9 +53,7 @@ class Matrix:
             raise TypeError(f"Can't subtract {type(other)} from Matrix")
 
         if len(self.rows[0]) != len(other.rows):
-            raise ValueError(
-                "Matrix dimensions don't match"
-            )
+            raise ValueError("Matrix dimensions don't match")
 
         rows = [[0 for _ in other.rows[0]] for _ in self.rows]
 
@@ -76,10 +66,7 @@ class Matrix:
 
     @__mul__.register(Number)
     def _(self, other):
-        return Matrix([
-            [item * other for item in row]
-            for row in self.rows
-        ])
+        return Matrix([[item * other for item in row] for row in self.rows])
 
     def __eq__(self, other):
         if isinstance(other, Matrix):
@@ -95,22 +82,28 @@ class Matrix:
 
 
 if __name__ == "__main__":
-    m0 = Matrix([
-        [1, 0, 0],
-        [0, 1, 0],
-        [0, 0, 1],
-    ])
-    m1 = Matrix([
-        [1, 2, 3],
-        [4, 1, 4],
-        [5, 7, 9],
-    ])
+    m0 = Matrix(
+        [
+            [1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1],
+        ]
+    )
+    m1 = Matrix(
+        [
+            [1, 2, 3],
+            [4, 1, 4],
+            [5, 7, 9],
+        ]
+    )
     assert (m1 * m0).rows == m1.rows
-    m2 = Matrix([
-        [1, 2, 3],
-        [1, 4, 3],
-        [1, 0, 5],
-    ])
+    m2 = Matrix(
+        [
+            [1, 2, 3],
+            [1, 4, 3],
+            [1, 0, 5],
+        ]
+    )
     assert (m2 * m0).rows == m2.rows
 
     assert m1 * 2 == m1 + m1

@@ -1,8 +1,9 @@
 from flask import Flask, request
+
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/")
 def echo():
     print(request.headers)
     return (
@@ -12,5 +13,5 @@ def echo():
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(host="0.0.0.0")

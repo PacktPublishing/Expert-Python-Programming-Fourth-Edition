@@ -13,9 +13,16 @@ api = Geocoding()
 
 
 PLACES = (
-    'Reykjavik', 'Vien', 'Zadar', 'Venice',
-    'Wrocław', 'Bolognia', 'Berlin', 'Słubice',
-    'New York', 'Dehli',
+    "Reykjavik",
+    "Vien",
+    "Zadar",
+    "Venice",
+    "Wrocław",
+    "Bolognia",
+    "Berlin",
+    "Słubice",
+    "New York",
+    "Dehli",
 )
 
 POOL_SIZE = 4
@@ -26,11 +33,13 @@ def fetch_place(place):
 
 
 def present_result(geocoded):
-    print("{:>25s}, {:6.2f}, {:6.2f}".format(
-        geocoded['formatted_address'],
-        geocoded['geometry']['location']['lat'],
-        geocoded['geometry']['location']['lng'],
-    ))
+    print(
+        "{:>25s}, {:6.2f}, {:6.2f}".format(
+            geocoded["formatted_address"],
+            geocoded["geometry"]["location"]["lat"],
+            geocoded["geometry"]["location"]["lng"],
+        )
+    )
 
 
 def main(use_threads=False):

@@ -10,10 +10,10 @@ from redis import Redis
 app = Flask(__name__)
 
 PIXEL = (
-    b'GIF89a\x01\x00\x01\x00\x80\x00\x00\x00'
-    b'\x00\x00\xff\xff\xff!\xf9\x04\x01\x00'
-    b'\x00\x00\x00,\x00\x00\x00\x00\x01\x00'
-    b'\x01\x00\x00\x02\x01D\x00;'
+    b"GIF89a\x01\x00\x01\x00\x80\x00\x00\x00"
+    b"\x00\x00\xff\xff\xff!\xf9\x04\x01\x00"
+    b"\x00\x00\x00,\x00\x00\x00\x00\x01\x00"
+    b"\x01\x00\x00\x02\x01D\x00;"
 )
 
 
@@ -26,12 +26,13 @@ def track(storage: ViewsStorageBackend):
     storage.increment(referer)
 
     return Response(
-        PIXEL, headers={
+        PIXEL,
+        headers={
             "Content-Type": "image/gif",
             "Expires": "Mon, 01 Jan 1990 00:00:00 GMT",
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
-        }
+        },
     )
 
 
@@ -39,7 +40,7 @@ def stats(storage: ViewsStorageBackend):
     return storage.most_common(10)
 
 
-@app.route('/test')
+@app.route("/test")
 def test():
     return """
     <html>
@@ -49,10 +50,8 @@ def test():
     """
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     views_storage = RedisBackend(Redis(host="redis"), "my-stats")
-    app.route("/track", endpoint="track")(
-        partial(track, storage=views_storage))
-    app.route("/stats", endpoint="stats")(
-        partial(stats, storage=views_storage))
+    app.route("/track", endpoint="track")(partial(track, storage=views_storage))
+    app.route("/stats", endpoint="stats")(partial(stats, storage=views_storage))
     app.run(host="0.0.0.0", port=8000)
