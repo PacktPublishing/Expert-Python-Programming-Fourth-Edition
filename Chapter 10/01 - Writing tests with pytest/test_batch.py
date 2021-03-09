@@ -1,5 +1,4 @@
 from itertools import chain
-import pytest
 
 from batch import batches
 

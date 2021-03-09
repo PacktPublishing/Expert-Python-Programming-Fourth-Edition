@@ -15,16 +15,3 @@ def batches(iterable: Iterable[Any], batch_size: int) -> Iterable[List[Any]]:
         results.append(batch)
 
     return results
-
-
-def batches(iterable, batch_size):
-    batch = []
-    for item in iterable:
-        batch.append(item)
-
-        if len(batch) == batch_size:
-            yield batch
-            batch = []
-
-    if batch:
-        yield
