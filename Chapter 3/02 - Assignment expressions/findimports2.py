@@ -10,7 +10,7 @@ import_from_re = re.compile(
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print(f"usage: {os.path.basename(__file__)} file-name")
-        exit(1)
+        sys.exit(1)
 
     with open(sys.argv[1]) as file:
         for line in file:
