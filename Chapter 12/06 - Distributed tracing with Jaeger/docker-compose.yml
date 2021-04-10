@@ -6,6 +6,8 @@ services:
       context: .
     ports:
       - 8000:8000
+    environment:
+      - JAEGER_AGENT_HOST=jaeger
     volumes:
       - ".:/app/"
 
@@ -24,3 +26,9 @@ services:
     ports:
       - 9090:9090
     restart: always
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "6831:6831/udp"
+      - "16686:16686"
