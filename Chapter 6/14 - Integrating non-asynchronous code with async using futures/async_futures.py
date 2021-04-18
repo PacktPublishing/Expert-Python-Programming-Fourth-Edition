@@ -18,7 +18,7 @@ THREAD_POOL_SIZE = 4
 async def fetch_rates(base):
     loop = asyncio.get_event_loop()
     response = await loop.run_in_executor(
-        None, requests.get, f"https://api.exchangeratesapi.io/latest?base={base}"
+        None, requests.get, f"https://api.vatcomply.com/rates?base={base}"
     )
     response.raise_for_status()
     rates = response.json()["rates"]

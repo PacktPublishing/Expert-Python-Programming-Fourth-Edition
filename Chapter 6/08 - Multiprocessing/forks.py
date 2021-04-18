@@ -22,8 +22,8 @@ def main():
     else:
         pid_list.append(os.getpid())
         print()
-        print("PRNT: hey, I am the parent")
-        print("PRNT: the child is pid %d" % child_pid)
+        print("PRNT: hey, I am the parent ")
+        print("PRNT: the child pid is %d" % child_pid)
         print("PRNT: all the pids I know %s" % pid_list)
 
 

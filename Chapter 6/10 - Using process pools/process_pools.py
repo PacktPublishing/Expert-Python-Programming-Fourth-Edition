@@ -6,12 +6,15 @@ import requests
 
 SYMBOLS = ("USD", "EUR", "PLN", "NOK", "CZK")
 BASES = ("USD", "EUR", "PLN", "NOK", "CZK")
+ACCESS_KEY = "d123dafec70cd7f3ebf84d3c1f9734e5"
 
 POOL_SIZE = 4
 
 
 def fetch_rates(base):
-    response = requests.get(f"https://api.exchangeratesapi.io/latest?base={base}")
+    response = requests.get(
+        f"https://api.vatcomply.com/rates"
+        f"base={base}&accesskey={ACCESS_KEY}")
     response.raise_for_status()
     rates = response.json()["rates"]
     # note: same currency exchanges to itself 1:1

@@ -7,7 +7,7 @@ BASES = ("USD", "EUR", "PLN", "NOK", "CZK")
 
 
 def fetch_rates(base):
-    response = requests.get(f"https://api.exchangeratesapi.io/latest?base={base}")
+    response = requests.get(f"https://api.vatcomply.com/rates?base={base}")
     response.raise_for_status()
     rates = response.json()["rates"]
 

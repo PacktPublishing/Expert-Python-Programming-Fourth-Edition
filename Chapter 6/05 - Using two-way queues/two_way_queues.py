@@ -18,7 +18,7 @@ THREAD_POOL_SIZE = 4
 
 
 def fetch_rates(base):
-    response = requests.get(f"https://api.exchangeratesapi.io/latest?base={base}")
+    response = requests.get(f"https://api.vatcomply.com/rates?base={base}")
 
     response.raise_for_status()
     rates = response.json()["rates"]
@@ -35,7 +35,7 @@ def present_result(base, rates):
 def worker(work_queue, results_queue):
     while not work_queue.empty():
         try:
-            item = work_queue.get(block=False)
+            item = work_queue.get_nowait()
         except Empty:
             break
         else:

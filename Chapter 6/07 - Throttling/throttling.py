@@ -4,7 +4,6 @@ showing how throttling / rate limiting can be implemented
 in multithreaded application
 
 """
-import random
 import time
 from queue import Queue, Empty
 from threading import Thread, Lock
@@ -23,7 +22,7 @@ class Throttle:
         self._consume_lock = Lock()
         self.rate = rate
         self.tokens = 0
-        self.last = 0
+        self.last = None
 
     def consume(self, amount=1):
         with self._consume_lock:
@@ -38,24 +37,23 @@ class Throttle:
 
             # make sure that quant of passed time is big
             # enough to add new tokens
-            if int(elapsed * self.rate):
-                self.tokens += int(elapsed * self.rate)
+            if elapsed * self.rate > 1:
+                self.tokens += elapsed * self.rate
                 self.last = now
 
             # never over-fill the bucket
-            self.tokens = self.rate if self.tokens > self.rate else self.tokens
+            self.tokens = min(self.rate, self.tokens)
 
             # finally dispatch tokens if available
             if self.tokens >= amount:
                 self.tokens -= amount
-            else:
-                amount = 0
+                return amount
 
-            return amount
+            return 0
 
 
 def fetch_rates(base):
-    response = requests.get(f"https://api.exchangeratesapi.io/latest?base={base}")
+    response = requests.get(f"https://api.vatcomply.com/rates?base={base}")
 
     response.raise_for_status()
     rates = response.json()["rates"]
@@ -72,22 +70,21 @@ def present_result(base, rates):
 def worker(work_queue, results_queue, throttle):
     while not work_queue.empty():
         try:
-            item = work_queue.get(block=False)
+            item = work_queue.get_nowait()
         except Empty:
             break
+
+        while not throttle.consume():
+            time.sleep(0.1)
+
+        try:
+            result = fetch_rates(item)
+        except Exception as err:
+            results_queue.put(err)
         else:
-
-            while not throttle.consume():
-                pass
-
-            try:
-                result = fetch_rates(item)
-            except Exception as err:
-                results_queue.put(err)
-            else:
-                results_queue.put(result)
-            finally:
-                work_queue.task_done()
+            results_queue.put(result)
+        finally:
+            work_queue.task_done()
 
 
 def main():

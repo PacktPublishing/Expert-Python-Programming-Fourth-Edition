@@ -19,7 +19,7 @@ THREAD_POOL_SIZE = 4
 
 
 def fetch_rates(base):
-    response = requests.get(f"https://api.exchangeratesapi.io/latest?base={base}")
+    response = requests.get(f"https://api.vatcomply.com/rates?base={base}")
 
     if random.randint(0, 5) < 1:
         # simulate error by overriding status code
@@ -40,19 +40,17 @@ def present_result(base, rates):
 def worker(work_queue, results_queue):
     while not work_queue.empty():
         try:
-            item = work_queue.get(block=False)
+            item = work_queue.get_nowait()
         except Empty:
             break
+        try:
+            result = fetch_rates(item)
+        except Exception as err:
+            results_queue.put(err)
         else:
-
-            try:
-                result = fetch_rates(item)
-            except Exception as err:
-                results_queue.put(err)
-            else:
-                results_queue.put(result)
-            finally:
-                work_queue.task_done()
+            results_queue.put(result)
+        finally:
+            work_queue.task_done()
 
 
 def main():
