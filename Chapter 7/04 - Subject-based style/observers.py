@@ -37,11 +37,13 @@ class Grepper(SubjectABC):
             if not os.path.isfile(item):
                 continue
 
-            self.notify_observers(("opened", item))
-            with open(item) as f:
-                if r.findall(f.read()):
-                    self.notify_observers(("matched", item))
-            self.notify_observers(("closed", item))
+            try:
+                with open(item) as f:
+                    self.notify_observers(("opened", item))
+                    if r.findall(f.read()):
+                        self.notify_observers(("matched", item))
+            finally:
+                self.notify_observers(("closed", item))
 
 
 class Presenter(ObserverABC):

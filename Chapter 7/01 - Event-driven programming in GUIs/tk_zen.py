@@ -1,6 +1,5 @@
 import this
-from tkinter import *
-from tkinter import messagebox
+from tkinter import Tk, Frame, Button, LEFT, messagebox
 
 rot13 = str.maketrans(
     "ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz",
