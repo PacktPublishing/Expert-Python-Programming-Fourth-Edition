@@ -24,7 +24,7 @@ def autorepr(cls):
     )
 
     def __repr__(self):
-        return repr_instance(self, attrs)
+        return repr_instance(self, sorted(attrs))
 
     cls.__repr__ = __repr__
 
