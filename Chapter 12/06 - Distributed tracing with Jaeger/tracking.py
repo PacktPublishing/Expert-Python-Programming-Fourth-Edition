@@ -31,7 +31,7 @@ REQUEST_TIME = Summary(
     "request_processing_seconds",
     "Time spent processing requests"
 )
-AVARAGE_TOP_HITS = Gauge(
+AVERAGE_TOP_HITS = Gauge(
     "average_top_hits",
     "Average number of top-10 page counts "
 )
@@ -68,7 +68,7 @@ def stats(storage: ViewsStorageBackend):
     with tracer.start_span("storage-query"):
         counts: dict[str, int] = storage.most_common(10)
 
-    AVARAGE_TOP_HITS.set(
+    AVERAGE_TOP_HITS.set(
         sum(counts.values()) / len(counts) if counts else 0
     )
     TOP_PAGE.info({
