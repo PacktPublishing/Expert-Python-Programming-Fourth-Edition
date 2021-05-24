@@ -33,9 +33,11 @@ def acme_client():
 
 from acme_sdk import AcmeHashMap, AcmeSession
 
+
 @pytest.fixture
 def acme_client():
     return AcmeHashMap(AcmeSession(..., ...))
+
 
 @pytest.fixture
 def acme_backend(acme_client):

@@ -13,7 +13,7 @@ import di
 
 app = Flask(__name__)
 tracer = Config(
-    config={'sampler': {'type': 'const', 'param': 1}},
+    config={"sampler": {"type": "const", "param": 1}},
     service_name="pixel-tracking",
 ).initialize_tracer()
 
@@ -27,18 +27,9 @@ PIXEL = (
     b"\x01\x00\x00\x02\x01D\x00;"
 )
 
-REQUEST_TIME = Summary(
-    "request_processing_seconds",
-    "Time spent processing requests"
-)
-AVERAGE_TOP_HITS = Gauge(
-    "average_top_hits",
-    "Average number of top-10 page counts "
-)
-TOP_PAGE = Info(
-    "top_page",
-    "Most popular referrer"
-)
+REQUEST_TIME = Summary("request_processing_seconds", "Time spent processing requests")
+AVERAGE_TOP_HITS = Gauge("average_top_hits", "Average number of top-10 page counts ")
+TOP_PAGE = Info("top_page", "Most popular referrer")
 
 
 @app.route("/track")
@@ -68,12 +59,8 @@ def stats(storage: ViewsStorageBackend):
     with tracer.start_span("storage-query"):
         counts: dict[str, int] = storage.most_common(10)
 
-    AVERAGE_TOP_HITS.set(
-        sum(counts.values()) / len(counts) if counts else 0
-    )
-    TOP_PAGE.info({
-        "top": max(counts, default="n/a", key=lambda x: counts[x])
-    })
+    AVERAGE_TOP_HITS.set(sum(counts.values()) / len(counts) if counts else 0)
+    TOP_PAGE.info({"top": max(counts, default="n/a", key=lambda x: counts[x])})
 
     return counts
 
@@ -90,9 +77,7 @@ def test():
 
 
 FlaskInjector(app=app, modules=[di.RedisModule()])
-app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
-    '/metrics': make_wsgi_app()
-})
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": make_wsgi_app()})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)

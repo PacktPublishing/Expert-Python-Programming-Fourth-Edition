@@ -5,9 +5,7 @@ def memoize(function):
         try:
             return call_cache[argument]
         except KeyError:
-            return call_cache.setdefault(
-                argument, function(argument)
-            )
+            return call_cache.setdefault(argument, function(argument))
 
     return memoized
 

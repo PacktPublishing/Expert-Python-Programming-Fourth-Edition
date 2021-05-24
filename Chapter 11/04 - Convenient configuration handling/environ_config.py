@@ -1,6 +1,7 @@
 from datetime import timedelta
 import environ
 
+
 @environ.config(prefix="")
 class Config:
     @environ.config()
@@ -15,7 +16,7 @@ class Config:
     schedule_interval = environ.var(
         name="SCHEDULE_INTERVAL_SECONDS",
         converter=lambda value: timedelta(seconds=int(value)),
-        default=50
+        default=50,
     )
 
 

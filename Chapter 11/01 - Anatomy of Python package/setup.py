@@ -1,6 +1,5 @@
-from setuptools import setup 
- 
-setup( 
-#    name='mypackage', 
-)
+from setuptools import setup
 
+setup(
+    name="mypackage",
+)

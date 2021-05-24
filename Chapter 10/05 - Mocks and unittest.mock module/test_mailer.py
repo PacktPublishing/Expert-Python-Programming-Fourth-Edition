@@ -9,7 +9,7 @@ def test_send_unittest():
     body = "Hello jane!"
     subject = "How are you?"
 
-    with patch('smtplib.SMTP') as mock:
+    with patch("smtplib.SMTP") as mock:
         client = mock.return_value
         client.sendmail.return_value = {}
 

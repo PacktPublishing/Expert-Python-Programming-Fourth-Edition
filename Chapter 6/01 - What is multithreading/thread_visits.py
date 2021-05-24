@@ -13,10 +13,7 @@ def visit_counter():
 
 if __name__ == "__main__":
     thread_count = 100
-    threads = [
-        Thread(target=visit_counter)
-        for _ in range(thread_count)
-    ]
+    threads = [Thread(target=visit_counter) for _ in range(thread_count)]
     for thread in threads:
         thread.start()
 

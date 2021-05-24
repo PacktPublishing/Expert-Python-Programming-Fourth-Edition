@@ -5,31 +5,33 @@ import logging.handlers
 
 import freezegun
 
-logging.config.dictConfig({
-    "version": 1,
-    "formatters": {
-        "default": {
-            "format": (
-                "%(asctime)s | %(levelname)s | "
-                "%(name)s | %(filename)s:%(lineno)d | "
-                "%(message)s"
-            )
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "formatters": {
+            "default": {
+                "format": (
+                    "%(asctime)s | %(levelname)s | "
+                    "%(name)s | %(filename)s:%(lineno)d | "
+                    "%(message)s"
+                )
+            },
         },
-    },
-    "handlers": {
-        "logfile": {
-            "class": "logging.handlers.TimedRotatingFileHandler",
-            "formatter": "default",
-            "filename": "application.log",
-            "when": "D",
-            "backupCount": 30,
-        }
-    },
-    "root": {
-        "handlers": ["logfile"],
-        "level": "INFO",
+        "handlers": {
+            "logfile": {
+                "class": "logging.handlers.TimedRotatingFileHandler",
+                "formatter": "default",
+                "filename": "application.log",
+                "when": "D",
+                "backupCount": 30,
+            }
+        },
+        "root": {
+            "handlers": ["logfile"],
+            "level": "INFO",
+        },
     }
-})
+)
 
 logger = logging.getLogger(__name__)
 

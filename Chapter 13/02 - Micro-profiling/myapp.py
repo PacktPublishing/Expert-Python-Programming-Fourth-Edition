@@ -4,7 +4,7 @@ import cProfile
 import pstats
 
 
-def profile(column='time', list=3):
+def profile(column="time", list=3):
     def parametrized_decorator(function):
         def decorated(*args, **kw):
             s = tempfile.mktemp()
@@ -16,6 +16,7 @@ def profile(column='time', list=3):
             p = pstats.Stats(s)
             print("=" * 5, f"{function.__name__}() profile", "=" * 5)
             p.sort_stats(column).print_stats(list)
+
         return decorated
 
     return parametrized_decorator
@@ -25,7 +26,7 @@ def medium():
     time.sleep(0.01)
 
 
-@profile('time')
+@profile("time")
 def heavy():
     for i in range(100):
         medium()
@@ -33,11 +34,11 @@ def heavy():
     time.sleep(2)
 
 
-@profile('time')
+@profile("time")
 def main():
     for i in range(2):
         heavy()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

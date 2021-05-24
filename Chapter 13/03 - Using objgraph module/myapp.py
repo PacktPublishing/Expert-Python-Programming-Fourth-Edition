@@ -5,17 +5,13 @@ import objgraph
 def graph_references(*objects):
     objgraph.show_refs(
         objects,
-        filename='show_refs.png',
+        filename="show_refs.png",
         refcounts=True,
         # additional filtering for the sake of brevity
         too_many=5,
         filter=lambda x: not isinstance(x, dict),
     )
-    objgraph.show_backrefs(
-        objects,
-        filename='show_backrefs.png',
-        refcounts=True
-    )
+    objgraph.show_backrefs(objects, filename="show_backrefs.png", refcounts=True)
 
 
 if __name__ == "__main__":

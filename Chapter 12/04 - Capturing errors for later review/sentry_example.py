@@ -9,7 +9,7 @@ sentry_logging = LoggingIntegration(
 )
 
 sentry_sdk.init(
-    dsn='https://<key>:<secret>@app.getsentry.com/<project>',
+    dsn="https://<key>:<secret>@app.getsentry.com/<project>",
     integrations=[sentry_logging],
 )
 

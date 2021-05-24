@@ -13,7 +13,7 @@ def test_send(faker: Faker, iteration: int):
     body = faker.paragraph()
     subject = faker.sentence()
 
-    with patch('smtplib.SMTP') as mock:
+    with patch("smtplib.SMTP") as mock:
         client = mock.return_value
         client.sendmail.return_value = {}
 
