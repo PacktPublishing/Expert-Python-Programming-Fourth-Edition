@@ -39,6 +39,19 @@ def stats():
     return dict(storage.most_common(10))
 
 
+@app.route("/")
+def index():
+    return """
+    <html>
+    <head></head>
+    <body>
+    <a href="/test">/test</a></br>
+    <a href="/stats">/stats</a>
+    </body>
+    </html>
+    """
+
+
 @app.route("/test")
 def test():
     return """
