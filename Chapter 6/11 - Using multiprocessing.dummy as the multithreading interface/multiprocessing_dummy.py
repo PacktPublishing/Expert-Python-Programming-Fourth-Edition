@@ -6,7 +6,6 @@ import requests
 
 SYMBOLS = ("USD", "EUR", "PLN", "NOK", "CZK")
 BASES = ("USD", "EUR", "PLN", "NOK", "CZK")
-ACCESS_KEY = "d123dafec70cd7f3ebf84d3c1f9734e5"
 
 POOL_SIZE = 4
 
