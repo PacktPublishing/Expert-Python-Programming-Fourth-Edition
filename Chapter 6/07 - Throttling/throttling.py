@@ -30,7 +30,7 @@ class Throttle:
 
             # time measument is initialized on first
             # token request to avoid initial bursts
-            if self.last == 0:
+            if self.last is None:
                 self.last = now
 
             elapsed = now - self.last
