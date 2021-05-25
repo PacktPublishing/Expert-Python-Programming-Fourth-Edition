@@ -31,12 +31,9 @@ def acme_client():
     return AcmeHashMapFake()
 
 
-from acme_sdk import AcmeHashMap, AcmeSession
-
-
 @pytest.fixture
 def acme_client():
-    return AcmeHashMap(AcmeSession(..., ...))
+    return AcmeHashMapFake()
 
 
 @pytest.fixture
@@ -44,7 +41,7 @@ def acme_backend(acme_client):
     return AcmeBackend(acme_client)
 
 
-@pytest.fixture(params=["redis_backend", "counter_backend", "acme_client"])
+@pytest.fixture(params=["redis_backend", "counter_backend", "acme_backend"])
 def backend(request):
     return request.getfixturevalue(request.param)
 

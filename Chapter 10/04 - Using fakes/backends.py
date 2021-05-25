@@ -42,7 +42,7 @@ class AcmeBackend(ViewsStorageBackend):
         self._acme = acme_hashmap
 
     def increment(self, key: str):
-        self._acme.atomic_incr(key)
+        self._acme.atomic_incr(key, 1)
 
     def most_common(self, n: int) -> Dict[str, int]:
         return self._acme.top_keys(n)

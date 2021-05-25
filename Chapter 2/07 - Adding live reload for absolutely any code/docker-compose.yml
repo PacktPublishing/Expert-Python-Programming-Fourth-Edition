@@ -6,8 +6,6 @@ services:
     ports:
     - "5000:5000"
     tty: true
-    depends_on:
-      - database
     command:
       watchmedo auto-restart --patterns "*.py" --recursive --
       python echo.py
