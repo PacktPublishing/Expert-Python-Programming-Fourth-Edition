@@ -8,6 +8,7 @@ RUN pip install \
  prometheus-client==0.10.1 \
  jaeger-client==4.4.0 \
  opentracing==2.4.0 \
+ 'Werkzeug<2.0.0' \
  Flask-OpenTracing==1.1.0
 
 RUN pip install --no-deps redis_opentracing==1.0.0

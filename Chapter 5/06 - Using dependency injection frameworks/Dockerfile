@@ -4,7 +4,7 @@ WORKDIR app
 RUN pip install \
  Flask==1.1.2 \
  redis==3.5.3 \
- 'Wezkzeug<2.0.0' \
+ 'Werkzeug<2.0.0' \
  Flask_Injector==0.12.3
 
 
