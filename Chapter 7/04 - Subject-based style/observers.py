@@ -67,16 +67,3 @@ if __name__ == "__main__":
     grepper = Grepper()
     grepper.register(Presenter())
     grepper.grep(sys.argv[1], sys.argv[2])
-
-
-# >>> from subject_based_events import Subject
-# >>> subject = Subject()
-# >>> observer1 = Observer()
-# >>> observer2 = Observer()
-# >>> observer3 = Observer()
-# >>> subject.register(observer1)
-# >>> subject.register(observer2)
-# <Observer: 1>: received event 'register(<Observer: 2>)' from <Subject: 1>
-# >>> subject.register(observer3)
-# <Observer: 1>: received event 'register(<Observer: 3>)' from <Subject: 1>
-# <Observer: 2>: received event 'register(<Observer: 3>)' from <Subject: 1>
