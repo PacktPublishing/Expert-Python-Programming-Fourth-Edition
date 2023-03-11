@@ -15,7 +15,7 @@ def profile(column="time", list=3):
 
             p = pstats.Stats(s)
             print("=" * 5, f"{function.__name__}() profile", "=" * 5)
-            p.sort_stats(column).print_stats(list)
+            p.sort_stats(column).strip_dirs().print_stats(list)
 
         return decorated
 
@@ -34,7 +34,6 @@ def heavy():
     time.sleep(2)
 
 
-@profile("time")
 def main():
     for i in range(2):
         heavy()
