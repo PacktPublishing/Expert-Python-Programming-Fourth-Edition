@@ -7,12 +7,12 @@ services:
     build: .
 
     # this is equivalent to "-p" option of
-    # the "docker build" command
+    # the "docker run" command
     ports:
     - "5000:5000"
 
     # this is equivalent to "-t" option of
-    # the "docker build" command
+    # the "docker run" command
     tty: true
 
   database:
