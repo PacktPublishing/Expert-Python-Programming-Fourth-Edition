@@ -7,7 +7,6 @@ services:
     - "5000:5000"
     tty: true
     command:
-      watchmedo auto-restart --patterns "*.py" --recursive --
-      python echo.py
+      watchmedo auto-restart --patterns "*.py" --recursive -- python echo.py
     volumes:
       - .:/app/
