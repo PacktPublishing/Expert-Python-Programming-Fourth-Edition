@@ -9,8 +9,7 @@ services:
     depends_on:
       - database
     command:
-      wait-for-it --service database:5432 --
-      python echo.py
+      wait-for-it --service database:5432 -- python echo.py
 
   database:
     image: postgres
