@@ -1,7 +1,7 @@
 """Cython module that provides fibonacci sequence function."""
 
 
-cdef long long fibonacci_cc(unsigned int n):
+cdef long long fibonacci_cc(unsigned int n) nogil:
     if n == 0:
         return 0
     if n == 1:
