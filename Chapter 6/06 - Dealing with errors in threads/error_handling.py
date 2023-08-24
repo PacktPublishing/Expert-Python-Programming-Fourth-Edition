@@ -1,7 +1,6 @@
 """
 "An example of a threaded application" section example
-showing how throttling / rate limiting can be implemented
-in multithreaded application
+Dealing with errors in threads
 
 """
 import random
